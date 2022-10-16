@@ -27,16 +27,16 @@ class Swing03v2{
 
 class MyCanvas extends JPanel implements ActionListener{
     ArrayList<Car> cars = new ArrayList<Car>();
-    ArrayList<Car2> cars2 = new ArrayList<Car2>();
-    ArrayList<Car3> cars3=new ArrayList<Car3>();
+    ArrayList<Ovni> ovnis = new ArrayList<Ovni>();
+   // ArrayList<Avion> aviones = new ArrayList<Avion>();
     public MyCanvas () {
         setPreferredSize(new Dimension(400,300));
         setBackground(Color.GRAY);
         Timer timer = new Timer(80, this);
         timer.start();
         cars.add(new Car(10, 250, 2, 0, Color.BLACK, 60,30));
-        cars2.add(new Car2(10, 200, 3, 0, Color.LIGHT_GRAY, 50,25));
-        cars3.add(new Car3(10,100,1,0,Color.BLUE,40,20));
+        ovnis.add(new Ovni(50,50,5,0,Color.DARK_GRAY,50,25));
+       // aviones.add(new Avion(0,70,3,0,Color.WHITE,50,25));
     }
 
     @Override
@@ -49,14 +49,14 @@ class MyCanvas extends JPanel implements ActionListener{
             c.move();
             c.draw(g);
         }
-        for(Car2 c2:cars2){
-            c2.move();
-            c2.draw(g);
+        for(Ovni o : ovnis){
+            o.move();
+            o.draw(g);
         }
-        for(Car3 c3:cars3){
-            c3.move();
-            c3.draw(g);
-        }
+      /*   for(Avion a : aviones){
+            a.move();
+            a.draw(g);
+        }*/
         paintBrush.drawTree();
     }
     @Override
@@ -217,44 +217,40 @@ class Car extends Vehicle{
     }
 }
 
-class Car2 extends Vehicle{
-    private int w, h;
-
-    public Car2(int x, int y, int speedX, int speedY, Color color, int w, int h){
-        super(x, y, speedX, speedY, color);
-        this.w = w;
-        this.h = h;
+class Ovni extends Vehicle{
+    private int w;
+    private int h;
+    public Ovni(int x,int y,int speedX,int speedY,Color color,int w,int h){
+        super(x,y,speedX,speedY,color);
+        this.w=w;
+        this.h=h;
     }
     public void draw(Graphics g){
         g.setColor(this.getColor());
-        g.fillRect(getDot().getX(), getDot().getY(), w, h);
-        g.setColor(Color.WHITE);
-        double x1 = w, x2 = w;
-        double y = h;
-        x1 *= 0.1; x2 *= 0.7;
-        y *= 0.8;
-        g.fillOval(getDot().getX() + (int)x1, getDot().getY() + (int)y, h/2, h/2);
-        g.fillOval(getDot().getX() + (int)x2, getDot().getY() + (int)y, h/2, h/2);
+        g.fillOval(getDot().getX(),getDot().getY(),w,h);
+        g.setColor(Color.DARK_GRAY);
     }
 }
 
-class Car3 extends Vehicle{
-    private int w, h;
-
-    public Car3(int x, int y, int speedX, int speedY, Color color, int w, int h){
-        super(x, y, speedX, speedY, color);
-        this.w = w;
-        this.h = h;
+/*class Avion extends Vehicle{
+    private int w;
+    private int h;
+    public Avion(int x,int y,int speedX,int speedY,Color color,int w,int h){
+        super(x,y,speedX,speedY,color);
+        this.w=w;
+        this.h=h;
     }
     public void draw(Graphics g){
         g.setColor(this.getColor());
-        g.fillRect(getDot().getX(), getDot().getY(), w, h);
+        g.fillOval(getDot().getX(),getDot().getY(),w,h);
         g.setColor(Color.WHITE);
-        double x1 = w, x2 = w;
+
+        double x1 = w;
         double y = h;
-        x1 *= 0.1; x2 *= 0.7;
+        x1 *= 0.1; 
         y *= 0.8;
         g.fillOval(getDot().getX() + (int)x1, getDot().getY() + (int)y, h/2, h/2);
-        g.fillOval(getDot().getX() + (int)x2, getDot().getY() + (int)y, h/2, h/2);
+
     }
-}
+   
+}     */  
